@@ -6,8 +6,13 @@ import {
 } from '../ui/Input/input-group';
 import { Button } from '../ui/Button/button';
 import { useTheme } from '@/providers/ThemeProvider';
+import type { SearchbarProps } from '@/types/types';
 
-export default function Searchbar() {
+export default function Searchbar({
+  searchbarValue,
+  setSearchbarValue,
+  results,
+}: SearchbarProps) {
   const { theme, setTheme } = useTheme();
   const isThemeLight = theme === 'light';
 
@@ -22,11 +27,15 @@ export default function Searchbar() {
   return (
     <div className="flex align-middle gap-3 mt-4">
       <InputGroup>
-        <InputGroupInput placeholder="Search tasks..." />
+        <InputGroupInput
+          placeholder="Search tasks..."
+          value={searchbarValue}
+          onChange={(e) => setSearchbarValue(e.target.value)}
+        />
         <InputGroupAddon>
           <Search />
         </InputGroupAddon>
-        <InputGroupAddon align="inline-end">12</InputGroupAddon>
+        <InputGroupAddon align="inline-end">{results}</InputGroupAddon>
       </InputGroup>
       <Button size="icon" onClick={toggleTheme}>
         {isThemeLight ? <Moon /> : <Sun />}

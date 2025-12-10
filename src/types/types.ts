@@ -1,3 +1,5 @@
+import type { Dispatch, SetStateAction } from "react";
+
 export type TitleProps = {
     children: React.ReactNode;
     className?: string;
@@ -28,4 +30,10 @@ export type TaskStore = {
     addTask: (body: string) => void;
     removeTask: (id: number) => void;
     editTask: (id: number, newBody: string) => void;
-}
+};
+
+export type SearchbarProps = {
+    searchbarValue: string;
+    setSearchbarValue: Dispatch<SetStateAction<string>>;
+    results: number;
+};

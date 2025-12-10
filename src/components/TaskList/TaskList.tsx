@@ -1,9 +1,7 @@
-import { useTaskStore } from '@/stores/taskStore';
 import Task from '../Task/Task';
+import type { Task as TaskType } from '@/types/types';
 
-export default function TaskList() {
-  const tasks = useTaskStore((state) => state.tasks);
-
+export default function TaskList({ tasks }: { tasks: TaskType[] }) {
   return (
     <div className="mt-4">
       {tasks.map((task) => (
