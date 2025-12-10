@@ -13,19 +13,17 @@ import { Textarea } from '../TextArea/textarea';
 import { useState } from 'react';
 import { useTaskStore } from '@/stores/taskStore';
 import { Alert, AlertTitle } from '../AlertDialog/alert';
+import { useValidation } from '@/hooks/useValidation';
 
 export default function MyDialog() {
   const [taskValue, setTaskValue] = useState('');
   const [isError, setIsError] = useState(false);
   const addTask = useTaskStore((state) => state.addTask);
-  const tasks = useTaskStore((state) => state.tasks);
+  const { cleanTaskValue, isValid } = useValidation(taskValue);
 
   const handleAddTask = () => {
-    const newTaskValue = taskValue.trim();
-    const isUnique = tasks.findIndex((task) => task.body === taskValue) === -1;
-
-    if (newTaskValue && isUnique) {
-      addTask(newTaskValue);
+    if (isValid) {
+      addTask(cleanTaskValue);
       setIsError(false);
       setTaskValue('');
     } else {
