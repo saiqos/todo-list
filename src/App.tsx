@@ -14,7 +14,7 @@ function App() {
   );
 
   return (
-    <div className="flex flex-col m-auto max-w-3/4 min-h-screen pb-5">
+    <div className="flex flex-col m-auto max-w-3/4 min-h-screen pb-10 md:pb-5">
       <header>
         <Title>Todo List</Title>
         <Searchbar
