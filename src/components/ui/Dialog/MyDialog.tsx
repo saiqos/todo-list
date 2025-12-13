@@ -57,7 +57,9 @@ export default function MyDialog() {
         )}
         <DialogFooter>
           <DialogClose>
-            <Button variant="outline">Cancel</Button>
+            <Button className="w-full" variant="outline">
+              Cancel
+            </Button>
           </DialogClose>
           <Button type="submit" onClick={handleAddTask}>
             Add Task

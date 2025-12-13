@@ -16,6 +16,7 @@ import {
 import { useState } from 'react';
 import { useValidation } from '@/hooks/useValidation';
 import { Alert, AlertTitle } from '../ui/AlertDialog/alert';
+import { Checkbox } from '../ui/Input/checkbox';
 
 export default function Task({ id, body, completed }: Task) {
   const removeTask = useTaskStore((state) => state.removeTask);
@@ -34,16 +35,17 @@ export default function Task({ id, body, completed }: Task) {
   };
 
   return (
-    <div className="flex gap-2 mt-3">
+    <div className="flex items-center gap-4 mt-3">
+      <Checkbox className="hover:bg-accent cursor-pointer" />
       <Textarea
         readOnly
         className={`resize-none min-h-10 ${completed ? 'line-through' : ''}`}
         value={body}
       />
-      <div className="flex gap-2">
+      <div className="flex flex-col sm:flex-row gap-2">
         <Dialog>
           <DialogTrigger>
-            <Button className="h-full w-10">
+            <Button className=" w-8 sm:w-10">
               <Pencil />
             </Button>
           </DialogTrigger>
@@ -67,7 +69,9 @@ export default function Task({ id, body, completed }: Task) {
             )}
             <DialogFooter>
               <DialogClose>
-                <Button variant="outline">Cancel</Button>
+                <Button className="w-full" variant="outline">
+                  Cancel
+                </Button>
               </DialogClose>
               <Button type="submit" onClick={handleEditTask}>
                 Save changes
@@ -75,9 +79,31 @@ export default function Task({ id, body, completed }: Task) {
             </DialogFooter>
           </DialogContent>
         </Dialog>
-        <Button className="h-full w-10" onClick={() => removeTask(id)}>
-          <Trash />
-        </Button>
+        <Dialog>
+          <DialogTrigger>
+            <Button className=" w-8 sm:w-10">
+              <Trash />
+            </Button>
+          </DialogTrigger>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>Task will be deleted</DialogTitle>
+            </DialogHeader>
+            <DialogDescription>
+              Are You sure that You want to delete this task?
+            </DialogDescription>
+            <DialogFooter>
+              <DialogClose>
+                <Button className="w-full" variant="outline">
+                  Cancel
+                </Button>
+              </DialogClose>
+              <Button type="submit" onClick={() => removeTask(id)}>
+                Confirm
+              </Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
       </div>
     </div>
   );
