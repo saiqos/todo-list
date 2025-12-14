@@ -33,8 +33,8 @@ export default function MyDialog() {
 
   return (
     <Dialog>
-      <DialogTrigger className="w-11 h-11 self-end mt-auto">
-        <Button className="rounded-full w-full h-full">
+      <DialogTrigger asChild className="self-end mt-auto">
+        <Button className="rounded-full w-11 h-11">
           <Plus />
         </Button>
       </DialogTrigger>
@@ -56,10 +56,8 @@ export default function MyDialog() {
           </Alert>
         )}
         <DialogFooter>
-          <DialogClose>
-            <Button className="w-full" variant="outline">
-              Cancel
-            </Button>
+          <DialogClose asChild>
+            <Button variant="outline">Cancel</Button>
           </DialogClose>
           <Button type="submit" onClick={handleAddTask}>
             Add Task

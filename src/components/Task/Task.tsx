@@ -36,16 +36,18 @@ export default function Task({ id, body, completed }: Task) {
 
   return (
     <div className="flex items-center gap-4 mt-3">
-      <Checkbox className="hover:bg-accent cursor-pointer" />
+      <Checkbox className="hover:bg-accent cursor-pointer w-6 h-6" />
       <Textarea
         readOnly
-        className={`resize-none min-h-10 ${completed ? 'line-through' : ''}`}
+        className={`resize-none min-h-10 text-sm md:text-base ${
+          completed ? 'line-through' : ''
+        }`}
         value={body}
       />
       <div className="flex flex-col sm:flex-row gap-2">
         <Dialog>
-          <DialogTrigger>
-            <Button className=" w-8 sm:w-10">
+          <DialogTrigger asChild>
+            <Button className=" w-8 h-8 sm:w-10 sm:h-10">
               <Pencil />
             </Button>
           </DialogTrigger>
@@ -57,6 +59,7 @@ export default function Task({ id, body, completed }: Task) {
             <Textarea
               value={newTaskBody}
               onChange={(e) => setNewTaskBody(e.target.value)}
+              className="text-sm md:text-base"
             >
               {newTaskBody}
             </Textarea>
@@ -68,10 +71,8 @@ export default function Task({ id, body, completed }: Task) {
               </Alert>
             )}
             <DialogFooter>
-              <DialogClose>
-                <Button className="w-full" variant="outline">
-                  Cancel
-                </Button>
+              <DialogClose asChild>
+                <Button variant="outline">Cancel</Button>
               </DialogClose>
               <Button type="submit" onClick={handleEditTask}>
                 Save changes
@@ -80,8 +81,8 @@ export default function Task({ id, body, completed }: Task) {
           </DialogContent>
         </Dialog>
         <Dialog>
-          <DialogTrigger>
-            <Button className=" w-8 sm:w-10">
+          <DialogTrigger asChild>
+            <Button className=" w-8 h-8 sm:w-10 sm:h-10">
               <Trash />
             </Button>
           </DialogTrigger>
@@ -93,10 +94,8 @@ export default function Task({ id, body, completed }: Task) {
               Are You sure that You want to delete this task?
             </DialogDescription>
             <DialogFooter>
-              <DialogClose>
-                <Button className="w-full" variant="outline">
-                  Cancel
-                </Button>
+              <DialogClose asChild>
+                <Button variant="outline">Cancel</Button>
               </DialogClose>
               <Button type="submit" onClick={() => removeTask(id)}>
                 Confirm
