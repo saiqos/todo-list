@@ -18,12 +18,17 @@ import { useValidation } from '@/hooks/useValidation';
 import { Alert, AlertTitle } from '../ui/AlertDialog/alert';
 import { Checkbox } from '../ui/Input/checkbox';
 
-export default function Task({ id, body }: Task) {
+export default function Task({ id, body, completed }: Task) {
+  //store
   const removeTask = useTaskStore((state) => state.removeTask);
   const editTask = useTaskStore((state) => state.editTask);
+  const toggleComplete = useTaskStore((state) => state.toggleComplete);
+
+  //local state
   const [newTaskBody, setNewTaskBody] = useState(body);
   const [isError, setIsError] = useState(false);
-  const [isCompleted, setIsCompleted] = useState(false);
+
+  //validation
   const { cleanTaskValue, isValid } = useValidation(newTaskBody);
 
   const handleEditTask = () => {
@@ -39,13 +44,13 @@ export default function Task({ id, body }: Task) {
     <div className="flex items-center gap-4 mt-3">
       <Checkbox
         className="hover:bg-accent cursor-pointer w-6 h-6"
-        checked={isCompleted}
-        onCheckedChange={(checked) => setIsCompleted(checked === true)}
+        checked={completed}
+        onCheckedChange={() => toggleComplete(id)}
       />
       <Textarea
         readOnly
         className={`resize-none min-h-10 text-sm md:text-base ${
-          isCompleted ? 'line-through' : ''
+          completed ? 'line-through' : ''
         }`}
         value={body}
       />

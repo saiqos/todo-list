@@ -1,4 +1,4 @@
-# React, TypeScript, Zustand, TailwindCSS, shadcn/ui, React Router, Vite
+# React, TypeScript, Zustand, TailwindCSS, shadcn/ui, Vite
 
 I built this project to show my ability to work with different tools, it has light and dark theme also.
 
